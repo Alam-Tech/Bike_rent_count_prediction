@@ -1,6 +1,7 @@
 #%%
 import pandas as pd
 import numpy as np
+np.set_printoptions(precision=4,suppress=True)
 #%%
 #Importing the data:
 train_data=pd.read_csv('D:\ML_Comps\Bike_sharing_demand_pred\Original_data\TRAIN.csv')
@@ -104,26 +105,57 @@ def evaluate(regressor,ind_vars,dep_vars,name):
 # The mean rmse is -298.86835074663287
 # The std.deviaion is 131.43360636021157
 
-from sklearn.ensemble import \
-    RandomForestRegressor,GradientBoostingRegressor,ExtraTreesRegressor,AdaBoostRegressor
-from xgboost import XGBRegressor,XGBRFRegressor
+# from sklearn.ensemble import \
+#     RandomForestRegressor,GradientBoostingRegressor,ExtraTreesRegressor,AdaBoostRegressor
+# from xgboost import XGBRegressor,XGBRFRegressor
 
 ind_train=data.iloc[:train_len,:-1].values
 dep_train=data.iloc[:train_len,-1].values
 
-from sklearn.preprocessing import StandardScaler
-scaler=StandardScaler()
-ind_train=scaler.fit_transform(ind_train)
+# from sklearn.preprocessing import StandardScaler
+# scaler=StandardScaler()
+# ind_train=scaler.fit_transform(ind_train)
 
-regressors=[
-    GradientBoostingRegressor(n_estimators=500),
-    ExtraTreesRegressor(n_estimators=500),
-    AdaBoostRegressor(n_estimators=200),
-    XGBRegressor(n_estimators=500),
-    XGBRFRegressor(n_estimators=500)
-]
-names=['GradBoostReg','ExtraTreeReg','AdaBoostReg','XGBReg','XGBRFReg']
+# regressors=[
+#     GradientBoostingRegressor(n_estimators=500),
+#     ExtraTreesRegressor(n_estimators=500),
+#     AdaBoostRegressor(n_estimators=200),
+#     XGBRegressor(n_estimators=500),
+#     XGBRFRegressor(n_estimators=500)
+# ]
+# names=['GradBoostReg','ExtraTreeReg','AdaBoostReg','XGBReg','XGBRFReg']
 
-for reg,name in zip(regressors,names):
-    evaluate(reg,ind_train,dep_train,name)
+# for reg,name in zip(regressors,names):
+#     evaluate(reg,ind_train,dep_train,name)
+# %%
+# Model tuning:
+# For first 12 variable(s)(500 est):
+# The mean rmse is -244.48910348356313
+# The std.deviaion is 94.91301107844511
+
+# from sklearn.ensemble import GradientBoostingRegressor
+# est_list=[100,300,500,1000]
+# learning_rates=[1,0.01,0.02,0.001]
+# n_estimators: 1000, lr: 0.02:
+# The mean rmse is -245.1338961848931
+# The std.deviaion is 100.45753981668197
+
+# for est in est_list:
+#     for lr in learning_rates:
+#         regressor=GradientBoostingRegressor(n_estimators=est,learning_rate=lr)
+#         evaluate(regressor,ind_train,dep_train,f'n_estimators: {est}, lr: {lr}')
+
+# indices=np.array(list(range(0,len(ind_train[0]))),dtype=int)
+# indices=indices.reshape(-1,1)
+# scores=np.array(regressor.feature_importances_).ravel()
+# scores=scores.reshape(-1,1)
+# score_table=np.append(indices,scores,axis=1)
+# score_table=score_table[score_table[:,-1].argsort()[::-1]]
+
+# target_vars=list(map(int,score_table[:15,0]))
+# %%
+# while len(target_vars)!=0:
+#     regressor=GradientBoostingRegressor(n_estimators=500)
+#     evaluate(regressor,ind_train[:,target_vars],dep_train,f'For first {len(target_vars)} variable(s)')
+#     del target_vars[-1]
 # %%
