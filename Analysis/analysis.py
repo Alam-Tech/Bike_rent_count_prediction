@@ -112,9 +112,14 @@ def evaluate(regressor,ind_vars,dep_vars,name):
 ind_train=data.iloc[:train_len,:-1].values
 dep_train=data.iloc[:train_len,-1].values
 
-# from sklearn.preprocessing import StandardScaler
-# scaler=StandardScaler()
-# ind_train=scaler.fit_transform(ind_train)
+from sklearn.preprocessing import StandardScaler
+scaler=StandardScaler()
+ind_train=scaler.fit_transform(ind_train)
+
+from sklearn.ensemble import GradientBoostingRegressor
+regressor=GradientBoostingRegressor(n_estimators=500)
+regressor.fit(ind_train,dep_train)
+# evaluate(regressor,ind_train,dep_train,f'GradientBoostReg n_est:500, lr:0.1')
 
 # regressors=[
 #     GradientBoostingRegressor(n_estimators=500),
@@ -145,17 +150,17 @@ dep_train=data.iloc[:train_len,-1].values
 #         regressor=GradientBoostingRegressor(n_estimators=est,learning_rate=lr)
 #         evaluate(regressor,ind_train,dep_train,f'n_estimators: {est}, lr: {lr}')
 
-# indices=np.array(list(range(0,len(ind_train[0]))),dtype=int)
-# indices=indices.reshape(-1,1)
-# scores=np.array(regressor.feature_importances_).ravel()
-# scores=scores.reshape(-1,1)
-# score_table=np.append(indices,scores,axis=1)
-# score_table=score_table[score_table[:,-1].argsort()[::-1]]
+indices=np.array(list(range(0,len(ind_train[0]))),dtype=int)
+indices=indices.reshape(-1,1)
+scores=np.array(regressor.feature_importances_).ravel()
+scores=scores.reshape(-1,1)
+score_table=np.append(indices,scores,axis=1)
+score_table=score_table[score_table[:,-1].argsort()[::-1]]
 
-# target_vars=list(map(int,score_table[:15,0]))
+target_vars=list(map(int,score_table[:12,0]))
+print(target_vars)
 # %%
 # while len(target_vars)!=0:
 #     regressor=GradientBoostingRegressor(n_estimators=500)
 #     evaluate(regressor,ind_train[:,target_vars],dep_train,f'For first {len(target_vars)} variable(s)')
 #     del target_vars[-1]
-# %%
