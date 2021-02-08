@@ -1,0 +1,26 @@
+﻿Model 2: OLS, using observations 1-7032
+Dependent variable: RentedBikeCount
+
+                      coefficient  std. error  t-ratio   p-value 
+  ---------------------------------------------------------------
+  const               −143.390     107.359      −1.336  0.1817   
+  Hour                  27.7390      0.831128   33.38   8.12e-227 ***
+  TemperatureAC         17.8272      3.93212     4.534  5.89e-06  ***
+  Humidity             −10.0091      1.06843    −9.368  9.76e-021 ***
+  Windspeedms           25.2919      5.64736     4.479  7.63e-06  ***
+  Dewpointtemperat~      7.77569     4.12891     1.883  0.0597    *
+  SolarRadiationMJ~    −81.3415      8.17735    −9.947  3.69e-023 ***
+  Rainfallmm           −59.4301      4.66309   −12.74   8.51e-037 ***
+  Snowfallcm            58.9070     13.8448      4.255  2.12e-05  ***
+  Seasons_Spring      −135.679      25.4263     −5.336  9.79e-08  ***
+  Seasons_Summer      −129.573      23.3965     −5.538  3.17e-08  ***
+  Seasons_Winter      −394.822      35.6811    −11.07   3.16e-028 ***
+  Holiday_NoHoliday    112.306      25.7832      4.356  1.34e-05  ***
+  FunctioningDay_Y~    945.170      46.2767     20.42   4.07e-090 ***
+
+Mean dependent var   689.1432   S.D. dependent var   652.1518
+Sum squared resid    1.35e+09   S.E. of regression   438.5547
+R-squared            0.548616   Adjusted R-squared   0.547780
+F(13, 7018)          656.1332   P-value(F)           0.000000
+Log-likelihood      −52750.03   Akaike criterion     105528.1
+Schwarz criterion    105624.1   Hannan-Quinn         105561.1
